@@ -41,19 +41,18 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
 
-    // Phone number field - must be exactly 10 digits
     phoneNumber: {
-      type: String,
-      validate: {
-        validator: function (v) {
-          return /^\d{10}$/.test(v); // Ensure phone number is exactly 10 digits
-        },
-        message: "Phone number should be exactly 10 digits",
-      },
-      trim: true,
-      index: true, // Indexed for quick lookup
+  type: String,
+  required: [true, "Phone number is required"],
+  validate: {
+    validator: function (v) {
+      return /^\+\d{10,15}$/.test(v); // Accepts + followed by 10–15 digits
     },
-
+    message: "Phone number must be in international format (e.g., +918408990000)",
+  },
+  trim: true,
+  index: true,
+},
     // Role field - must be one of the defined roles
     role: {
       type: String,
@@ -83,6 +82,18 @@ const UserSchema = new mongoose.Schema(
       type: Date,
     },
 
+    // Add these to the UserSchema
+    otp: {
+      type: String,
+    },
+    otpExpires: {
+      type: Date,
+    },
+    verificationMethod: {
+      type: String,
+      enum: ['email', 'sms'],
+      default: 'email'
+    },
     // Security answer for additional user security
     securityQuestionAnswer: {
       type: String,

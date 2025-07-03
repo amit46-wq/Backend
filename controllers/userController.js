@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const { uploadOnCloudinary } = require("../utils/cloudinary.js");
 const Property = require("../models/propertyModel");
+const { sendOTP } = require("../utils/smsService.js");
+const crypto = require("crypto");
 
 exports.getUserInfo = async (req, res) => {
   try {
