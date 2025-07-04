@@ -55,8 +55,8 @@ const pricingSubmit = async (req, res) => {
         //const email = userEmailMap.get(String(prop.userId)) || "N/A";
 
         return `#${idx + 1}: https://toletglobe.in/property/${prop._id}
-                Owner Contact: ${prop.ownersContactNumber || "N/A"}
-                Location: ${locationLink}`;
+  Owner Contact: ${prop.ownersContactNumber || "N/A"}
+  Location: ${locationLink}`;
       })
       .join("\n\n");
   }
